@@ -9,7 +9,7 @@ namespace XboxWebApi.Common
             LoggerFactory.Create(builder =>
             {
                 builder
-                    .AddFilter(logLevel => logLevel >= LogLevel.Information)
+                    .AddFilter(logLevel => logLevel >= LogLevel.Trace)
                     .AddDebug();
             });
     }

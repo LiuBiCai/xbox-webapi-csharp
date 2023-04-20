@@ -1,13 +1,14 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XboxWebApi", "XboxWebApi\XboxWebApi.csproj", "{BB9D8D6D-5075-4C74-8CE8-B8EF81F827AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XboxWebApi", "XboxWebApi\XboxWebApi.csproj", "{BB9D8D6D-5075-4C74-8CE8-B8EF81F827AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XboxWebApi.Tests", "XboxWebApi.Tests\XboxWebApi.Tests.csproj", "{E1F7E73C-48FE-4B96-8639-8B50EEE41E1B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XboxWebApi.Tests", "XboxWebApi.Tests\XboxWebApi.Tests.csproj", "{E1F7E73C-48FE-4B96-8639-8B50EEE41E1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XboxWebApi.Cli", "XboxWebApi.Cli\XboxWebApi.Cli.csproj", "{2F59ECE3-9421-4357-A289-85FF28FFD3A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XboxWebApi.Cli", "XboxWebApi.Cli\XboxWebApi.Cli.csproj", "{2F59ECE3-9421-4357-A289-85FF28FFD3A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XboxAuth", "XboxAuth\XboxAuth.csproj", "{DFD71933-ADB5-490F-A78E-1A4AF22E3201}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,9 +18,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{BB9D8D6D-5075-4C74-8CE8-B8EF81F827AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -58,5 +56,23 @@ Global
 		{2F59ECE3-9421-4357-A289-85FF28FFD3A9}.Release|x64.Build.0 = Release|x64
 		{2F59ECE3-9421-4357-A289-85FF28FFD3A9}.Release|x86.ActiveCfg = Release|x86
 		{2F59ECE3-9421-4357-A289-85FF28FFD3A9}.Release|x86.Build.0 = Release|x86
+		{DFD71933-ADB5-490F-A78E-1A4AF22E3201}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFD71933-ADB5-490F-A78E-1A4AF22E3201}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFD71933-ADB5-490F-A78E-1A4AF22E3201}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DFD71933-ADB5-490F-A78E-1A4AF22E3201}.Debug|x64.Build.0 = Debug|Any CPU
+		{DFD71933-ADB5-490F-A78E-1A4AF22E3201}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DFD71933-ADB5-490F-A78E-1A4AF22E3201}.Debug|x86.Build.0 = Debug|Any CPU
+		{DFD71933-ADB5-490F-A78E-1A4AF22E3201}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFD71933-ADB5-490F-A78E-1A4AF22E3201}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DFD71933-ADB5-490F-A78E-1A4AF22E3201}.Release|x64.ActiveCfg = Release|Any CPU
+		{DFD71933-ADB5-490F-A78E-1A4AF22E3201}.Release|x64.Build.0 = Release|Any CPU
+		{DFD71933-ADB5-490F-A78E-1A4AF22E3201}.Release|x86.ActiveCfg = Release|Any CPU
+		{DFD71933-ADB5-490F-A78E-1A4AF22E3201}.Release|x86.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {79D74757-DC4F-47D1-AD5A-B1321EE2B619}
 	EndGlobalSection
 EndGlobal

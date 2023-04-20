@@ -6,15 +6,16 @@ using XboxWebApi.Common;
 using XboxWebApi.Authentication.Model;
 using System.Text;
 using System.Threading.Tasks;
-using System.Net.Http;
 using System.Text.Encodings.Web;
 using Microsoft.Extensions.Logging;
+using System.Net.Http;
 
 namespace XboxWebApi.Authentication
 {
     public class AuthenticationService
     {
         static ILogger logger = Logging.Factory.CreateLogger<AuthenticationService>();
+        
         public AccessToken AccessToken { get; set; }
         public RefreshToken RefreshToken { get; set; }
         public UserToken UserToken { get; set; }
@@ -30,6 +31,7 @@ namespace XboxWebApi.Authentication
         /// <returns>An instance of HttpClient</returns>
         public static HttpClient ClientFactory(string baseUrl)
         {
+            
             logger.LogTrace("ClientFactory(string baseUrl) called with baseUrl: {}", baseUrl);
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(baseUrl.EndsWith("/") ? baseUrl : baseUrl + "/");
@@ -92,7 +94,7 @@ namespace XboxWebApi.Authentication
                 logger.LogTrace("AuthenticateAsync: Calling AuthenticateXSTSAsync");
                 XToken = await AuthenticateXSTSAsync(UserToken, DeviceToken, TitleToken);
             }
-            catch (HttpRequestException ex)
+            catch (System.Net.Http.HttpRequestException ex)
             {
                 logger.LogError(ex, "AuthenticateAsync failed due to HTTP error: {}", ex.Message);
                 return false;
@@ -154,7 +156,7 @@ namespace XboxWebApi.Authentication
             logger.LogTrace("RefreshLiveTokenAsync() called");
             HttpClient client = ClientFactory("https://login.live.com/");
 
-            var request = new HttpRequestMessage(HttpMethod.Get, "oauth20_token.srf");
+            var request = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Get, "oauth20_token.srf");
             var parameters = new Model.WindowsLiveRefreshQuery(refreshToken);
             request.AddQueryParameter(parameters.GetQuery());
             
@@ -171,7 +173,7 @@ namespace XboxWebApi.Authentication
         {
             logger.LogTrace("AuthenticateXASUAsync() called");
             HttpClient client = ClientFactory("https://user.auth.xboxlive.com/");
-            var request = new HttpRequestMessage(HttpMethod.Post, "user/authenticate");
+            var request = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Post, "user/authenticate");
             var requestBody = new XASURequest(accessToken);
             request.Content = new JsonContent(requestBody);
             request.Headers.Add("x-xbl-contract-version", "1");
@@ -191,7 +193,7 @@ namespace XboxWebApi.Authentication
         {
             logger.LogTrace("AuthenticateXASDAsync() called");
             HttpClient client = ClientFactory("https://device.auth.xboxlive.com/");
-            var request = new HttpRequestMessage(HttpMethod.Post, "device/authenticate");
+            var request = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Post, "device/authenticate");
             var requestBody = new XASDRequest(accessToken);
             request.Headers.Add("x-xbl-contract-version", "1");
             request.Content = new JsonContent(requestBody);
@@ -212,7 +214,7 @@ namespace XboxWebApi.Authentication
         {
             logger.LogTrace("AuthenticateXASTAsync() called");
             HttpClient client = ClientFactory("https://title.auth.xboxlive.com/");
-            var request = new HttpRequestMessage(HttpMethod.Post, "title/authenticate");
+            var request = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Post, "title/authenticate");
             var requestBody = new XASTRequest(accessToken, deviceToken);
             request.Headers.Add("x-xbl-contract-version", "1");
             request.Content = new JsonContent(requestBody);
@@ -235,7 +237,7 @@ namespace XboxWebApi.Authentication
         {
             logger.LogTrace("AuthenticateXSTSAsync() called");
             HttpClient client = ClientFactory("https://xsts.auth.xboxlive.com/");
-            var request = new HttpRequestMessage(HttpMethod.Post, "xsts/authorize");
+            var request = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Post, "xsts/authorize");
             var requestBody = new XSTSRequest(userToken,
                                               deviceToken: deviceToken,
                                               titleToken: titleToken);
@@ -244,6 +246,10 @@ namespace XboxWebApi.Authentication
 
             var response = await client.SendAsync(request);
             var data = await response.Content.ReadAsJsonAsync<XASResponse>();
+
+            //save all cookies
+            //client.cook
+            
             return new XToken(data);
         }
 

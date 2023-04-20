@@ -1,10 +1,16 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Linq;
 using Microsoft.Extensions.Logging;
 using XboxWebApi.Authentication.Model;
 using XboxWebApi.Common;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using Newtonsoft.Json;
 
 namespace XboxWebApi.Authentication.Headless
 {
@@ -181,7 +187,7 @@ namespace XboxWebApi.Authentication.Headless
             request.Content = new FormUrlEncodedContent(loginRequest.GetFormContent());
 
             response = await _client.SendAsync(request);
-
+            SaveCookiesToFile("email", _clientHandler.CookieContainer);
             try
             {
                 // If auth flow is already done, return tokens
@@ -196,5 +202,31 @@ namespace XboxWebApi.Authentication.Headless
 
             return await DoTwoFactorAuthAsync(_client, serverData, email, ppftValue);
         }
+
+
+        void LoadCookiesFromFile(string path, CookieContainer cookieContainer)
+        {
+            SetCookies(cookieContainer, File.ReadAllText(path));
+        }
+
+        void SaveCookiesToFile(string path, CookieContainer cookieContainer)
+        {
+            File.WriteAllText(path, GetCookies(cookieContainer));
+        }
+
+        string GetCookies(CookieContainer cookieContainer)
+        {
+            return JsonConvert.SerializeObject(cookieContainer);           
+        }
+
+        void SetCookies(CookieContainer cookieContainer, string cookieText)
+        {
+            cookieContainer = JsonConvert.DeserializeObject<CookieContainer>(cookieText);
+        }
+
+
+
+
+
     }
 }
